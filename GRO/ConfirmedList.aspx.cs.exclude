@@ -1,0 +1,113 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Data.SqlClient;
+using System.Data;
+using System.Linq;
+using System.Web;
+using System.Web.UI;
+using System.Web.UI.WebControls;
+
+public partial class GRO_ConfirmedList : System.Web.UI.Page
+{
+    ConnectionClass cc = new ConnectionClass();
+    SqlCommand cmd;
+    Aesenc aes = new Aesenc();
+    DataTable dt;
+    string sql = "";
+    string res = "";
+    protected void Page_Load(object sender, EventArgs e)
+    {
+        try
+        {
+
+            if (!IsPostBack)
+            {
+                loaddata();
+            }
+
+        }
+        catch (Exception ex)
+        {
+            cc.messageweb(this, "Something Went Wrong");
+        }
+    }
+
+    private void loaddata()
+    {
+
+        sql = "SELECT  gr.id, gr.GrievanceId, gr.Name, gr.CreatedOn, gr.SchemeName, gr.DistrictName, gr.BlockName, gr.PanchayatName, rm.RoleName as forwardedtoname, gr.GrievanceStatusMasterID, gr.ForwardedToRoleID, gr.ResolvedStatus, gr.ConfirmedStatus, gr.ClosedStatus FROM GrievanceRegistration gr inner join RoleMaster rm on rm.ID = gr.ForwardedToRoleID where GrievanceStatusMasterID in ('4','5') and ForwardedFromRoleID in ('3','5','7') and ResolvedStatus is not null and ClosedStatus = '0' and ConfirmedStatus is not null order by CreatedOn";
+        dt = cc.FillTable(sql);
+        grdgrievancedetails.DataSource = dt;
+        grdgrievancedetails.DataBind();
+    }
+
+    private string encryptedgrievanceid(string id)
+    {
+        string plaintext = id;
+        string plainkey = DateTime.Now.Ticks.ToString().Substring(0, 16);
+        Session["key"] = plainkey;
+        string x = aes.encryptionfromcode(plaintext, plainkey, plainkey);
+        return x;
+    }
+
+    protected void grdgrievancedetails_RowCommand(object sender, GridViewCommandEventArgs e)
+    {
+        string id = e.CommandArgument.ToString();
+
+        if (e.CommandName == "close")
+        {
+            Response.Redirect("GrievanceProcessing.aspx?close=" + encryptedgrievanceid(id));
+        }
+        if (e.CommandName == "view")
+        {
+            Response.Redirect("GrievanceProcessing.aspx?view=" + encryptedgrievanceid(id));
+        }
+    }
+
+    protected void grdgrievancedetails_PageIndexChanging(object sender, GridViewPageEventArgs e)
+    {
+        grdgrievancedetails.PageIndex = e.NewPageIndex;
+        loaddata();
+
+    }
+
+    protected void btnsearch_Click(object sender, EventArgs e)
+    {
+        try
+        {
+            if (txtgrievanceid.Text != "")
+            {
+                sql = "SELECT  gr.id, gr.GrievanceId, gr.Name, gr.CreatedOn, gr.SchemeName, gr.DistrictName, gr.BlockName, gr.PanchayatName, rm.RoleName as forwardedtoname, gr.GrievanceStatusMasterID, gr.ForwardedToRoleID, gr.ResolvedStatus, gr.ConfirmedStatus, gr.ClosedStatus FROM GrievanceRegistration gr inner join RoleMaster rm on rm.ID = gr.ForwardedToRoleID where grievanceid = '" + txtgrievanceid.Text + "' and GrievanceStatusMasterID in ('4','5') and ForwardedFromRoleID in ('3','5','7') and ResolvedStatus is not null and ClosedStatus = '0' and ConfirmedStatus is not null";
+                dt = cc.FillTable(sql);
+                if (dt.Rows.Count > 0)
+                {
+                    grdgrievancedetails.DataSource = dt;
+                    grdgrievancedetails.DataBind();
+                    foreach (GridViewRow row in grdgrievancedetails.Rows)
+                    {
+                        LinkButton btnedit = row.FindControl("btnedit") as LinkButton;
+                        LinkButton btnview = row.FindControl("btnview") as LinkButton;
+
+                        btnedit.Visible = false;
+                        btnview.Visible = true;
+
+                    }
+                }
+                else
+                {
+                    cc.messageweb(this, "Grievance ID Not Found");
+                    loaddata();
+                }
+            }
+        }
+        catch (Exception ex)
+        {
+
+        }
+    }
+
+    protected void btnrefresh_Click(object sender, EventArgs e)
+    {
+        loaddata();
+    }
+}
