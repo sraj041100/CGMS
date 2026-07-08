@@ -210,21 +210,6 @@ Press F5
 
 ---
 
-## 👨‍💻 Author
-
-### Shivam Raj
-
-🎓 MCA Student | Full Stack Developer
-
-📍 Patna, Bihar, India
-
-📧 Email: shivamraj041100@gmail.com
-
-🔗 LinkedIn: https://linkedin.com/in/sraj04
-
-🔗 GitHub: https://github.com/sraj041100
-
----
 
 ## ⭐ Show Your Support
 
