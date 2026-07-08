@@ -101,17 +101,22 @@ The system eliminates paperwork, improves transparency, and significantly reduce
 
 ### Student Dashboard
 <p align="center">
-  <img src="screenshots/student-dashboard.png" width="900">
+  <img src="screenshots/Student/d_student_dashboard.png" width="900">
 </p>
 
-### Admin Dashboard
+### GRO Dashboard
 <p align="center">
-  <img src="screenshots/admin-dashboard.png" width="900">
+  <img src="screenshots/GRO/d_gro_dashboard.png" width="900">
+</p>
+
+### Register Grievance
+<p align="center">
+  <img src="screenshots/Student/d_student_register_grievance.png" width="900">
 </p>
 
 ### Grievance Management
 <p align="center">
-  <img src="screenshots/grievance-page.png" width="900">
+  <img src="screenshots/HOD/d_hod_closing.png" width="900">
 </p>
 
 ---
