@@ -96,7 +96,7 @@ The system eliminates paperwork, improves transparency, and significantly reduce
 
 ### Login Page
 <p align="center">
-  <img src="screenshots/d_login.png" width="900">
+  <img src="screenshots/login/d_login.png" width="900">
 </p>
 
 ### Student Dashboard
