@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="screenshots/d_login.png" alt="CGMS Banner" width="100%">
+  <img src="screenshots/login/d_login.png" alt="CGMS Banner" width="100%">
 </p>
 
 <h1 align="center">🎓 College Grievance Management System (CGMS)</h1>
