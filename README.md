@@ -9,7 +9,7 @@
 </p>
 
 <p align="center">
-  <a href="http://cgms.shivamraj.in">
+  <a href="http://projects.cgms.shivamraj.in">
     <img src="https://img.shields.io/badge/Live%20Demo-Visit-success?style=for-the-badge">
   </a>
   <a href="https://github.com/sraj041100/CGMS">
@@ -88,7 +88,7 @@ The system eliminates paperwork, improves transparency, and significantly reduce
 
 ## 🚀 Live Demo
 
-🌐 **Website:** http://cgms.shivamraj.in
+🌐 **Website:** http://projects.cgms.shivamraj.in
 
 ---
 
